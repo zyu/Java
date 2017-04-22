@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Sign Up - PixelAdmin</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+	<!-- Open Sans font from Google CDN -->
+
+	<!-- Pixel Admin's stylesheets -->
+	<!-- Pixel Admin's stylesheets -->
+	<link th:href="@{assets/stylesheets/bootstrap.min.css}" href="../static/assets/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link th:href="@{assets/stylesheets/pixel-admin.min.css}" href="../static/assets/stylesheets/pixel-admin.min.css" rel="stylesheet" type="text/css">
+	<link th:href="@{assets/stylesheets/pages.min.css}" href="../static/assets/stylesheets/pages.min.css" rel="stylesheet" type="text/css">
+	<link th:href="@{assets/stylesheets/rtl.min.css}" href="../static/assets/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
+	<link th:href="@{assets/stylesheets/themes.min.css}" href="../static/assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
+
+	<!--[if lt IE 9]>
+	<script th:src="@{assets/javascripts/ie.min.js}" src="../static/assets/javascripts/ie.min.js"></script>
+	<![endif]-->
+
+
+	<!-- $DEMO =========================================================================================
+
+        Remove this section on production
+    -->
+	<style>
+		#signup-demo {
+			position: fixed;
+			right: 0;
+			bottom: 0;
+			z-index: 10000;
+			background: rgba(0,0,0,.6);
+			padding: 6px;
+			border-radius: 3px;
+		}
+		#signup-demo img { cursor: pointer; height: 40px; }
+		#signup-demo img:hover { opacity: .5; }
+		#signup-demo div {
+			color: #fff;
+			font-size: 10px;
+			font-weight: 600;
+			padding-bottom: 6px;
+		}
+	</style>
+	<!-- / $DEMO -->
+
+</head>
+
+
+<!-- 1. $BODY ======================================================================================
+
+	Body
+
+	Classes:
+	* 'theme-{THEME NAME}'
+	* 'right-to-left'     - Sets text direction to right-to-left
+-->
+<body class="theme-default page-signup">
+
+<!-- Demo script --> <script th:src="@{assets/demo/demo.js}" src="assets/demo/demo.js"></script> <!-- / Demo script -->
+
+<!-- Page background -->
+<div id="page-signup-bg">
+	<!-- Background overlay -->
+	<div class="overlay"></div>
+	<!-- Replace this with your bg image -->
+	<img   th:src="@{assets/demo/signin-bg-1.jpg}"  src="../static/assets/demo/signin-bg-1.jpg" alt="">
+</div>
+<!-- / Page background -->
+
+<!-- Container -->
+<div class="signup-container">
+	<!-- Header -->
+	<div class="signup-header">
+		<a href="index.html"  class="logo">
+			<img th:src="@{assets/demo/logo-big.png}"  src="../static/assets/demo/logo-big.png" alt="" style="margin-top: -5px;">&nbsp;
+			Admin
+		</a> <!-- / .logo -->
+		<div class="slogan">
+			<p th:if="${param.error}" class="alert alert-error">There was an error, please try again</p>
+		</div> <!-- / .slogan -->
+	</div>
+	<!-- / Header -->
+
+	<!-- Form -->
+	<div class="signup-form">
+		<form  action="/authenticate" method="post" id="signin-form_id">
+
+				<div class="form-group">
+					<input type="text" name="signin_username" id="username_id" class="form-control input-lg" placeholder="手机号">
+					<input type="hidden"  th:name="${_csrf.parameterName}"  th:value="${_csrf.token}"   />
+				</div> <!-- / Username -->
+
+				<div class="form-group signin-password">
+					<input type="password" name="signin_password" id="password_id" class="form-control input-lg" placeholder="密码">
+				</div> <!-- / Password -->
+
+				<div class="form-actions">
+					<input type="submit" value="Sign In" class="btn btn-primary btn-block btn-lg">
+				</div> <!-- / .form-actions -->
+		</form>
+		<!-- / Form -->
+
+	</div>
+	<!-- Right side -->
+</div>
+
+
+
+<!-- Get jQuery from Google CDN -->
+<script th:src="@{assets/javascripts/jquery-1.10.2.min.js}" src="../static/assets/javascripts/jquery-1.10.2.min.js"></script>
+
+
+<!-- Pixel Admin's javascripts -->
+<script th:src="@{assets/javascripts/bootstrap.min.js}" src="../static/assets/javascripts/bootstrap.min.js"></script>
+<script th:src="@{assets/javascripts/pixel-admin.min.js}" src="../static/assets/javascripts/pixel-admin.min.js"></script>
+
+<script type="text/javascript">
+    window.PixelAdmin.start([
+        function () {
+            $("#signin-form_id").validate({ focusInvalid: true, errorPlacement: function () {} });
+
+            // Validate username
+            $("#username_id").rules("add", {
+                required: true,
+                minlength: 3
+            });
+
+            // Validate password
+            $("#password_id").rules("add", {
+                required: true,
+                minlength: 6
+            });
+        }
+    ]);
+</script>
+
+</body>
+</html>
